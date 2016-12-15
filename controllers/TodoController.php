@@ -14,6 +14,7 @@ class TodoController
     {
         $title = $_POST['task'];
 
+
         App::get('query')->insert('todo', [
             'title' => $title,
         ]);
@@ -23,9 +24,16 @@ class TodoController
 
     public function update()
     {
-        $id = 1;
-        App::get('query')->update('todo', $_POST, [
-            'id' => $id
-        ]);
+        if (isset($_POST['act'])){
+            if($_POST['act']=='u') {
+
+                App::get('query')->update('todo', $_POST['complete']);
+            }
+            if ($_POST['act']=='d'){
+
+                App::get('query')->del('todo', $_POST['complete']);
+            }
+        }
+        Request::goBack();
     }
 }

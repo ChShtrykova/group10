@@ -33,9 +33,9 @@ class Router
         if( array_key_exists($url, $this->routers[Request::method()]) ){
             return $this->callClass($url);
             // return $this->routers[$url];
-        }
+        }else {echo "Not found";}
 
-        throw new Exception('Page not Found');
+        //throw new Exception('Page not Found');
     }
 
 
