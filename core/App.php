@@ -1,5 +1,7 @@
 <?php
 
+namespace core;
+
 class App
 {
     private static $app = [];

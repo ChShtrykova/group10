@@ -1,5 +1,7 @@
 <?php
 
+namespace core\database;
+
 class QueryBuilder
 {
     /** @var  mysqli */

@@ -1,5 +1,11 @@
 <?php
+
 session_start();
+
+use core\App;
+use core\database\QueryBuilder;
+use core\Router;
+use core\database\Connector;
 
 require "core/autoload.php";
 
