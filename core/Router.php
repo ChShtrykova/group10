@@ -2,7 +2,6 @@
 
 namespace core;
 
-use core\Request;
 
 class Router
 {
@@ -32,20 +31,25 @@ class Router
 
     public function run()
     {
-        $url = \core\Request::url();
+        $url = Request::url();
 
-        if( array_key_exists($url, $this->routers[\core\Request::method()]) ){
+        if( array_key_exists($url, $this->routers[Request::method()]) ){
             return $this->callClass($url);
             // return $this->routers[$url];
         }
         throw new \Exception('Page not Found');
+
     }
 
 
     protected function callClass($url)
     {
-        list($class, $method) = explode('@', $this->routers[\core\Request::method()][$url]);
-        $class = new $class;
+
+       list($class, $method) = explode('@', $this->routers[Request::method()][$url]);
+        $object = "\\controllers\\{$class}";
+        $class = new $object;
         $class->$method();
+
+
     }
 }
