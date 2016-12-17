@@ -32,9 +32,9 @@ class Router
 
     public function run()
     {
-        $url = Request::url();
+        $url = \core\Request::url();
 
-        if( array_key_exists($url, $this->routers[Request::method()]) ){
+        if( array_key_exists($url, $this->routers[\core\Request::method()]) ){
             return $this->callClass($url);
             // return $this->routers[$url];
         }
@@ -44,7 +44,7 @@ class Router
 
     protected function callClass($url)
     {
-        list($class, $method) = explode('@', $this->routers[Request::method()][$url]);
+        list($class, $method) = explode('@', $this->routers[\core\Request::method()][$url]);
         $class = new $class;
         $class->$method();
     }
