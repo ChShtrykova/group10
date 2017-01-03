@@ -18,8 +18,25 @@ class PageController
 
     public function add()
     {
-        $examples = $_POST['calculate'];
-
+        $re = '@\d*([+/*-])\d*@me';
+        $calculate = $_POST['calculate'];
+        $stm = preg_match($re, $calculate,$m);
+        list($a, $b) = explode($m[1], $calculate);
+        switch ($m[1]){
+            case '+':
+                $res = $a+$b;
+                break;
+            case '-':
+                $res = $a-$b;
+                break;
+            case '*':
+               $res = $a*$b;
+                break;
+            case '/':
+                $res = $a/$b;
+                break;
+        };
+        $examples = "$calculate = $res";
 
         App::get('query')->insert('plus', [
             'examples' => $examples,
