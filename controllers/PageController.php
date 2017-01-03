@@ -1,15 +1,31 @@
 <?php
 namespace controllers;
 
+use core\App;
+use core\Request;
+
 class PageController
 {
 
-    public function index()
+    public function home()
     {
         $title = 'Главная';
-        $pageTitle = 'Главная';
+        $pageTitle = 'Калькулятор';
+        $examplesList = App::get('query')->selectAll('plus');
 
         include "views/index.view.php";
+    }
+
+    public function add()
+    {
+        $examples = $_POST['calculate'];
+
+
+        App::get('query')->insert('plus', [
+            'examples' => $examples,
+        ]);
+
+        Request::goBack();
     }
 
     public function table()
